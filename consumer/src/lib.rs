@@ -5,6 +5,7 @@ mod cxx_bridge {
         
         type MySharedStruct = core::cxx_bridge::MySharedStruct;
 
+        include!("consumer/include/header.h");
         fn do_something(t: MySharedStruct) -> MySharedStruct;
     }
 
@@ -13,8 +14,7 @@ mod cxx_bridge {
     }
 }
 
-use core::cxx_bridge::MySharedStruct;
 
-fn do_another_thing(t: MySharedStruct) -> MySharedStruct {
+fn do_another_thing(t: cxx_bridge::MySharedStruct) -> cxx_bridge::MySharedStruct {
     cxx_bridge::do_something(t)
 }
