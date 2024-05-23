@@ -2,11 +2,15 @@
 name = "core"
 version = "0.1.0"
 edition = "2021"
-links = "core"
 
 [dependencies]
-cxx.workspace = true
+cxx = { workspace = true,  optional = true }
+cxx-build = { workspace = true, optional = true }
 
-[build-dependencies]
-cxx-build.workspace = true
+[features]
+with_cxx = ["cxx", "cxx-build"]
 
+[[bin]]
+name = "bridge"
+path = "bin/bridge.rs"
+required-features = ["with_cxx"]
